@@ -1,5 +1,7 @@
+{{#if logged}}
 <nav class="navbar navbar-light bg-light pl-5">
   <a class="navbar-brand" href="#">Samsung</a>
+  <a class="navbar-brand mr-auto" href="#tb">Table</a>
   <a href="home/logout" class="btn btn-danger">Log out</a>
 </nav>
 
@@ -23,3 +25,33 @@
         {{/each}}
     </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table" id="tb">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.name}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.price}}</td>
+      <td><img style="width: 100px;" src="{{this.image}}" alt=""></td>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+{{/if}}

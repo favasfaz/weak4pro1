@@ -55,7 +55,8 @@ let products=[{
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
- res.render('home',{products})
+  var logged=req.session.loggedIn
+ res.render('home',{products,logged})
 });
 
 router.get('/logout',(req,res)=>{
@@ -63,4 +64,6 @@ router.get('/logout',(req,res)=>{
   res.redirect('/')
 
 })
+
+
 module.exports = router;
