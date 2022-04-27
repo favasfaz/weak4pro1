@@ -7,22 +7,19 @@
 
             <form action="/login" method="post">
             {{#if loggErr}}
-            <p style="color: red;">check password and username</p>
+            <p style="color: red;" id="error">check password and username</p>
             {{/if}}
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"  required>
                 <label for="floatingPassword">Password</label>
               </div>
 
               <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
-                <label class="form-check-label" for="rememberPasswordCheck">
-                  Remember password
-                </label>
+               <a href="/signuppage" style="color: red; margin-left: -20px;">Create new account</a>
               </div>
               <div class="d-grid">
                 <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" value="submit">Sign
@@ -35,3 +32,14 @@
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(function(){
+      $('#floatingPassword').blur(function(){
+        let text=$(this).val()
+        if(text.length<4){
+            $('#error').show()
+        }
+      })
+    })
+  </script>

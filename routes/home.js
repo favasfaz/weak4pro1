@@ -1,6 +1,8 @@
-const src = require('debug');
+// const src = require('debug');
+var db=require('../config/connection')
+
 var express = require('express');
-const res = require('express/lib/response');
+// const res = require('express/lib/response');
 var router = express.Router();
 
 let products=[{
@@ -54,12 +56,14 @@ let products=[{
 ]
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
+ res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
   var logged=req.session.loggedIn
  res.render('home',{products,logged})
 });
 
 router.get('/logout',(req,res)=>{
+  res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
   req.session.destroy()
   res.redirect('/')
 

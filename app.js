@@ -6,6 +6,8 @@ var logger = require('morgan');
 var session=require('express-session')
 var loginRouter = require('./routes/login');
 var homeRouter = require('./routes/home');
+var db=require('./config/connection');
+
 
 var app = express();
 
@@ -18,12 +20,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+db.connect((err)=>{
+  if(err) console.log('something went wrong');
+  else console.log('database connected');
+})
 
 app.use(session({secret:"key",
 resave:true,
 saveUninitialized:true,
 cookie:{maxAge:60000}
 }))
+
 
 app.use('/', loginRouter);
 app.use('/home', homeRouter);
