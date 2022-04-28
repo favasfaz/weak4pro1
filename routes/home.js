@@ -5,6 +5,7 @@ var express = require('express');
 // const res = require('express/lib/response');
 var router = express.Router();
 
+
 let products=[{
   name:"Galexy M52",
   category:"mobile",

@@ -6,7 +6,9 @@ var logger = require('morgan');
 var session=require('express-session')
 var loginRouter = require('./routes/login');
 var homeRouter = require('./routes/home');
+var adminRouter = require('./routes/admin');
 var db=require('./config/connection');
+var hbs=require('express-handlebars')
 
 
 var app = express();
@@ -14,6 +16,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialDir:__dirname+'/views/partials/'}))
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,12 +31,13 @@ db.connect((err)=>{
 app.use(session({secret:"key",
 resave:true,
 saveUninitialized:true,
-cookie:{maxAge:60000}
+cookie:{maxAge:600000}
 }))
 
 
 app.use('/', loginRouter);
 app.use('/home', homeRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

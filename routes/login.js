@@ -8,11 +8,6 @@ var userHelpers=require('../helpers/user-helpers')
 const { findPerson } = require('../helpers/user-helpers');
 
 
-const pass={
-  password:1234
-}
-
-
 /* GET home page. */
 router.get('/', function(req, res) {
   res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
@@ -21,16 +16,17 @@ if(req.session.loggedIn){
   }else
  {
    res.render('login',{'loggErr':req.session.loggErr});
-  req.session.loggErr=false
  }
 });
 router.post('/login',(req,res)=>{
   // res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
-  console.log(req.body, "body");
  userHelpers.Aperson(req.body.email).then((result)=>{
+  req.session.user=req.body
+   req.session.loggedIn=true
       res.redirect('/home')
   }).catch(()=>{
-    res.render('login')
+    loggErr=true
+    res.render('login',{'loggErr':loggErr})
   })
 
 })
