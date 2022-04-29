@@ -12,5 +12,12 @@
         <a class="nav-link" href="#">All products</a>
       </li>
       </ul>
+            <a href="/admin/logout" class="btn btn-danger ml-auto" onclick="preventBack()" >logout</a>
+
   </div>
 </nav>
+<script>
+ function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+</script>

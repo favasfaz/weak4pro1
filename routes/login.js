@@ -22,12 +22,13 @@ if(req.session.loggedIn){
 router.post('/login',(req,res)=>{
   // res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
  userHelpers.Aperson(req.body.email).then((result)=>{
-  req.session.user=req.body
+   console.log(result);
+    req.session.user=req.body
    req.session.loggedIn=true
       res.redirect('/home')
-  }).catch(()=>{
-    loggErr=true
-    res.render('login',{'loggErr':loggErr})
+  }).catch((err)=>{
+    req.session.loggErr=err.msge
+     res.redirect('/')
   })
 
 })
