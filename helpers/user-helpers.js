@@ -33,5 +33,13 @@ module.exports={
             console.log(userDetails.Email);
             resolve(userDetails)
         })
+    },
+    deleteProducts:(productId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection('users').remove({_id:objectId(productId)}).then((response)=>{
+                resolve(response)
+            })
+            
+        })
     }
 }

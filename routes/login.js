@@ -16,6 +16,7 @@ if(req.session.loggedIn){
   }else
  {
    res.render('login',{'loggErr':req.session.loggErr});
+  req.session.loggErr=false
  }
 });
 router.post('/login',(req,res)=>{
@@ -33,22 +34,6 @@ router.post('/login',(req,res)=>{
 router.get('/signuppage',(req,res)=>{
   res.render('signup')
 })
-router.post('/register',(req,res)=>{
-  res.header('Cache-control','no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0,pre-check=0');
-  userHelpers.findPerson(req.body.Email,(result)=>{
-    if(result){
-      console.log('err');
-      mailErr=true
-      res.render('signup',{'mailErr':mailErr})
-      mailErr=false
-    }else{
-      userHelpers.doSignup(req.body,(result)=>{
-        console.log(result);
-        res.redirect('/home')
-       })
-    }
-  })
- 
-})
+
 
 module.exports = router;

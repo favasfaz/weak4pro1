@@ -1,5 +1,5 @@
-<div class="container">
-    <table class="table">
+<div class="container mt-5">
+    <table class="table" id="productstable">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -14,8 +14,19 @@
       <th scope="row">1</th>
       <td>{{this.Email}}</td>
       <td>{{this.Name}}</td>
+            <td>
+                <a href="/admin/deleteProduct/{{this._id}}" class="btn btn-danger">Delete</a>
+                 <a href="" class="btn btn-primary">Edit</a>
+
+                </td>
+
      {{/each}}
     </tr>
   </tbody>
 </table>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#productstable').DataTable();
+} );
+</script>

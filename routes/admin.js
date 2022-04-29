@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var userHelpers= require('../helpers/user-helpers')
 var db=require('../config/connection')
+var objectId = require('mongodb').ObjectId
 
 var admin={
 password:5555
@@ -14,18 +15,16 @@ router.get('/', function(req, res) {
         userHelpers.userDetails().then((result)=>{
             res.render('for-admin/adminPanel',{'result':result,admin:true})
         })
-       
-    }else{
+       }else{
         res.render('for-admin/adminLogin')
-
-    }
+ }
 });
 router.post('/logined',(req,res)=>{
 if(admin.password==req.body.password){
-    req.session.admin=req.body
+    req.session.admins=req.body
     req.session.loggedIn=true
 userHelpers.userDetails().then((result)=>{
-res.render('for-admin/adminPanel',{'result':result})
+res.render('for-admin/adminPanel',{'result':result,admin:true})
 })
     
 }
@@ -35,6 +34,15 @@ else{
 }
 })
  
+router.get('/deleteProduct/:id',(req,res)=>{
+    let productId=req.params.id
+    userHelpers.deleteProducts(productId).then(()=>{
+        userHelpers.userDetails().then((result)=>{
+            res.render('for-admin/adminPanel',{'result':result})
+        })
+       
+    })
+})
   
 
 
