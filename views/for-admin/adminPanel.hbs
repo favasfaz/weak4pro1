@@ -1,14 +1,15 @@
 {{#if admin}}
 
-<div class="container mt-5">
+{{!-- <div class="container mt-5">
                 <a href="/admin/addUser" class="btn btn-success mb-5">Add user</a>
 
     <table class="table" id="productstable">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+      <th scope="col">Name</th>
+       <th scope="col">Status</th>
       <th scope="col">Handle</th>
     </tr>
   </thead>
@@ -18,11 +19,16 @@
       <th scope="row">1</th>
       <td>{{this.Email}}</td>
       <td>{{this.Name}}</td>
+       <td>{{this.status}}</td>
+
             <td>
               <a href=" /admin/editUser/{{this._id}}" class="btn btn-primary">Edit</a>
 
               
                  <a href="/admin/block/{{this._id}}" class="btn btn-warning">Block</a>
+
+                 <a href="/admin/unblock/{{this._id}}" class="btn btn-warning">unBlock</a>
+
                 
                  <a href="/admin/deleteProduct/{{this._id}}" class="btn btn-danger">Delete</a>
                  
@@ -37,6 +43,141 @@
   $(document).ready( function () {
     $('#productstable').DataTable();
 } );
-</script>
+</script> --}}
+<div class="container bootstrap snippets bootdey">
+<div class="panel-body inf-content">
+    <div class="row mt-4">
+                        {{#each result}}
+
+        <div class="col-md-4 ml-5">
+
+            <img alt="" style="width:200px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+            <ul title="Ratings" class="list-inline ratings text-center">
+                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+            </ul>
+        </div>
+        <div class="col-md-6" style="border-bottom:2px dashed black;">
+            <strong>Information</strong><br>
+            <div class="table-responsive">
+            <table class="table table-user-information">
+                <tbody>
+                    {{!-- <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                Identificacion                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            123456789     
+                        </td>
+                    </tr> --}}
+                    <tr>    
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                Name                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                          {{this.Name}}    
+                        </td>
+                    </tr>
+                    {{!-- <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-cloud text-primary"></span>  
+                                Lastname                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            Bootstrap  
+                        </td>
+                    </tr> --}}
+
+                    {{!-- <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                Username                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            bootnipets 
+                        </td>
+                    </tr> --}}
+
+
+                    <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                Role                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            User
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                Email                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{this.Email}}
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                status                                               
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                           {{this.status}}
+                        </td>
+                    </tr>
+                    {{!-- <tr>        
+                        <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                Modified                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                             20 jul 20014 20:00:00
+                        </td>
+                    </tr>   
+                                          --}}
+                                          <tr>
+                                             <td>
+              <a href=" /admin/editUser/{{this._id}}" class="btn btn-primary">Edit</a>
+
+              
+                 <a href="/admin/block/{{this._id}}" class="btn btn-warning">Block</a>
+
+                 <a href="/admin/unblock/{{this._id}}" class="btn btn-warning">unBlock</a>
+
+                
+                 <a href="/admin/deleteProduct/{{this._id}}" class="btn btn-danger">Delete</a>
+                 
+                </td>
+                                          </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+</div>                                        
 
 {{/if}}

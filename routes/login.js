@@ -27,7 +27,7 @@ router.post('/login',(req,res)=>{
    req.session.loggedIn=true
       res.redirect('/home')
   }).catch((err)=>{
-    req.session.loggErr=err.msge
+    req.session.loggErr=true
      res.redirect('/')
   })
 

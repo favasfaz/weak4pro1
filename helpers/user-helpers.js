@@ -1,7 +1,7 @@
 var db=require('../config/connection')
 const bcrypt=require('bcrypt')
 const async = require('hbs/lib/async')
-const { promise, reject } = require('bcrypt/promises')
+// const { promise, reject } = require('bcrypt/promises')
 // const { response } = require('../app')
 var objectId=require('mongodb').ObjectId
 module.exports={
@@ -76,6 +76,15 @@ module.exports={
 return new Promise(async(resolve,reject)=>{
     await  db.get().collection('users').updateOne({_id:objectId(proid)},{
         $set:{status:"false"}
+    })
+    resolve()
+})
+    },
+    unblockUser:(proid)=>{
+        console.log(proid);
+return new Promise(async(resolve,reject)=>{
+    await  db.get().collection('users').updateOne({_id:objectId(proid)},{
+        $set:{status:"true"}
     })
     resolve()
 })

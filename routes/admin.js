@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var userHelpers= require('../helpers/user-helpers')
 var db=require('../config/connection');
-const { status } = require('express/lib/response');
 // const async = require('hbs/lib/async');
 var objectId = require('mongodb').ObjectId
 
@@ -42,9 +41,7 @@ router.get('/deleteProduct/:id',(req,res)=>{
     let productId=req.params.id
     userHelpers.deleteProducts(productId).then(()=>{
         req.session.user=null
-        userHelpers.userDetails().then((result)=>{
-            res.render('for-admin/adminPanel',{'result':result,admin:true})
-        })
+       res.redirect('/admin')
        
     })
 })
@@ -78,19 +75,24 @@ router.get('/deleteProduct/:id',(req,res)=>{
   })
   router.post('/edited/:id',(req,res)=>{
 userHelpers.updateUser(req.params.id,req.body).then(()=>{
-    userHelpers.userDetails().then((result)=>{
-        res.render('for-admin/adminPanel',{'result':result,admin:true})
-    })
+  res.redirect('/admin')
 })
   })
   router.get('/block/:id',(req,res)=>{
 let Id=req.params.id
 console.log(Id);
     userHelpers.blockUser(req.params.id).then(()=>{
-          res.redirect('/admin',{status:false})
+          res.redirect('/admin')
   })
   })
  
+  router.get('/unblock/:id',(req,res)=>{
+    let Id=req.params.id
+    console.log(Id);
+        userHelpers.unblockUser(req.params.id).then(()=>{
+              res.redirect('/admin')
+      })
+      })
       
 
 module.exports = router;
